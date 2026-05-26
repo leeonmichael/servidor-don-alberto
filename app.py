@@ -5,4 +5,6 @@ print("Servidor GigaMoto / Don Alberto Iniciado")
 # TODO: Terminar la lógica de persistencia del inventario
 def api_inventario():
     print("Buscando repuestos en el inventario...")
-    # Código incompleto...
+    # AGREGANDO LOGICA NUEVA DE INVENTARIO
+def consultar_stock():
+    print("Buscando repuestos en la base de datos...")
