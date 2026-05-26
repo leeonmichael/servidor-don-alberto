@@ -1,16 +1,46 @@
-# --- CÓDIGO DEL SERVIDOR DON ALBERTO ---
-print("Servidor GigaMoto Iniciado")
+from flask import Flask, jsonify, request
+import datetime
 
-# FASE 1: Programando la ruta compleja del inventario (A MEDIAS)
-# TODO: Terminar la lógica de persistencia del inventario
-def api_inventario():
-    print("Buscando repuestos en el inventario...")
-    # AGREGANDO LOGICA NUEVA DE INVENTARIO
-def consultar_stock():
-    print("Buscando repuestos en la base de datos...")
-# FASE 3: Reparación de emergencia (Hotfix)
-# Fix: Forzar formateo de placas a mayúsculas en producción
-def api_peritajes(placa):
-    placa_formateada = placa.upper()
-    print(f"Placa procesada de forma segura: {placa_formateada}")
-    return placa_formateada
+app = Flask(__name__)
+
+peritajes = []
+
+@app.route('/api/registros', methods=['GET'])
+def registros():
+    return jsonify({
+        "status": "SERVIDOR PRINCIPAL - Inventario en mantenimiento",
+        "servidor": "Ubuntu de Mendieta",
+        "hora_servidor": str(datetime.datetime.now()),
+        "inventario": ["Bujias de Iridio", "Refrigerante", "Transistores", "Filtro de aceite"]
+    })
+
+@app.route('/api/peritajes', methods=['POST'])
+def guardar_peritajes():
+    data = request.json
+    placa = data.get("placa").upper()
+    peritajes.append(placa)
+    return jsonify({
+        "mensajes": "Peritaje registrado",
+        "placa": placa
+    })
+
+@app.route('/api/peritajes', methods=['GET'])
+def ver_peritajes():
+    return jsonify({
+        "peritajes": peritajes
+    })
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000, debug=True)
+
+@app.route('/api/inventario', methods=['GET'])
+def inventario():
+    return jsonify({
+        "repuestos": [
+            "Bujias NGK",
+            "Aceite para motor",
+            "Pastillas de freno",
+            "Filtro de aire"
+        ],
+        "estado": "En desarrollo"
+    })
