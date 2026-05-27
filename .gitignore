@@ -1,0 +1,16 @@
+# Ignorar entornos virtuales (Nunca deben subirse)
+venv/
+ENV/
+
+# Ignorar archivos de caché de ejecución de Python
+_pycache_/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignorar bases de datos locales de desarrollo
+*.sqlite3
+
+# Ignorar archivos del sistema operativo anfitrión
+.DS_Store
+Thumbs.db
